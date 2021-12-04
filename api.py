@@ -75,9 +75,9 @@ def getOldMaxClanMembers():
 def getBlockedPackages():
     print('Running ' + sys._getframe().f_code.co_name)
     if (OS == 'ios') or (OS=='amazon'):
-        randomOs = replaceAndroid(random.choice(strictOsTypes()))
+        randomOs = removeAmazon(replaceAndroid(random.choice(strictOsTypes())))
         print('This feature is not availible for ' + OS + '... Replacing to osType ' +
-              randomOs)
+              counterReplaceAndroid(randomOs))
         return requests.get(urls['PB'] + randomOs + '.json').json()['JoinBaseResponseOn']
     else:
          return requests.get(urls['PB'] + replaceAndroid(OS) + '.json').json()['JoinBaseResponseOn']
