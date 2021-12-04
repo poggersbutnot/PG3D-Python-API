@@ -1,9 +1,7 @@
 __author__ = 'poggersbutnot | Karim'
 __version__ = '3.2.3'
 import requests, sys, os, random, json, time, string, urllib, warnings
-if (requests.get('https://raw.githubusercontent.com/poggersbutnot/PG3D-Python-API/main/Info/version.info').text.rstrip('\n') == vars()['__version__']):
-    pass
-else:
+if not(requests.get('https://raw.githubusercontent.com/poggersbutnot/PG3D-Python-API/main/Info/version.info').text.rstrip('\n') == vars()['__version__']):
     warnings.warn('This API has an Update! https://github.com/poggersbutnot/PG3D-Python-API/')
 
 urls = {
