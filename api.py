@@ -36,6 +36,9 @@ def quoteJson(object1: dict, object2: dict):
 def replaceNullBytes(content: bytes):
     return content.replace(b'\x00', b'')
 
+def getAuthRep():
+    return [b'model', b'token', b'1403']
+
 def replaceAndroid(ostype: str):
     return ostype.replace('android', 'androd')
 
@@ -238,12 +241,9 @@ def decodeAuth(content: bytes):
     n = replaceNullBytes(content)
     for l in range(257):
         f = bytes([(c+l)%256 for c in n])
-        if b'token' in f:
-            return deleteNonAscii(f)
-        elif b'model' in f:
-            return deleteNonAscii(f)
-        elif b'1403' in f:
-            return deleteNonAscii(f)
+        for i in range(len(getAuthRep())):
+            if getAuthRep()[i] in f:
+                return deleteNonAscii(f)
 
 def getBrawlData():
     print('Running ' + sys._getframe().f_code.co_name) ; return requests.get(urls['BRA'] + OS + '.json').json()
